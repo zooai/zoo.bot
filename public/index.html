@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zoo Bot — open AI agent for the open AI research network</title>
+  <meta name="description" content="Zoo Bot is the open agent runtime for the Zoo research network. Runs on your machine, plugs into Zoo, Lux, and Hanzo, talks on any channel, and trains on shared experience instead of weights." />
+  <meta property="og:title" content="Zoo Bot" />
+  <meta property="og:description" content="Open AI agent for the open AI research network — Zoo Labs Foundation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zoo.bot" />
+  <meta property="og:image" content="https://zoo.bot/og.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@zoo_labs" />
+  <link rel="icon" type="image/svg+xml" href="/zoo-logo.svg" />
+  <link rel="canonical" href="https://zoo.bot" />
+  <style>
+    :root {
+      --bg: #050a07;
+      --bg-2: #0a1610;
+      --fg: #e8f4ec;
+      --muted: #7a8e83;
+      --accent: #00cc66;
+      --accent-2: #1be38a;
+      --line: rgba(0, 204, 102, 0.18);
+      --card: rgba(0, 204, 102, 0.04);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(ellipse at top, var(--bg-2) 0%, var(--bg) 60%);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { color: var(--accent); }
+    code, pre, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 0; border-bottom: 1px solid var(--line);
+    }
+    nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.01em; }
+    nav .brand img { width: 28px; height: 28px; }
+    nav ul { display: flex; gap: 28px; list-style: none; padding: 0; margin: 0; font-size: 14px; }
+    nav ul a { color: var(--muted); }
+    nav ul a:hover { color: var(--fg); }
+    .hero { padding: 96px 0 64px; }
+    .eyebrow {
+      display: inline-block; font-size: 12px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.05; letter-spacing: -0.025em; font-weight: 800;
+      margin: 0 0 24px;
+    }
+    h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lede { font-size: 20px; color: var(--muted); max-width: 720px; margin: 0 0 36px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 8px;
+      font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-primary { background: var(--accent); color: #001a0d; }
+    .btn-primary:hover { background: var(--accent-2); }
+    .btn-secondary { border: 1px solid var(--line); color: var(--fg); }
+    .btn-secondary:hover { border-color: var(--accent); }
+    pre.install {
+      margin-top: 36px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px; overflow-x: auto;
+    }
+    pre.install .cmt { color: var(--muted); }
+    pre.install .ok { color: var(--accent); }
+
+    section.feat { padding: 64px 0; border-top: 1px solid var(--line); }
+    section.feat h2 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 36px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .card {
+      padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+    }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .stack { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; color: var(--muted); font-size: 14px; }
+    .stack b { color: var(--fg); font-weight: 600; }
+
+    footer { padding: 48px 0 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    footer .row { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav>
+      <div class="brand"><img src="/zoo-logo.svg" alt="" /> zoo.bot</div>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="https://github.com/zooai/bot">GitHub</a></li>
+        <li><a href="https://zoo.ngo">Foundation</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">Open AI Research · Zoo Labs Foundation</span>
+      <h1>Your AI agent, <em>on your machine</em>, on the open research network.</h1>
+      <p class="lede">
+        Zoo Bot is an open agent runtime built on the Zoo research network — DeAI for
+        decentralised intelligence, DeSci for decentralised research. Runs locally,
+        talks on any channel, and learns from shared experience instead of weights.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/zooai/bot">Get the source →</a>
+        <a class="btn btn-secondary" href="https://zoo.cloud">Zoo Cloud</a>
+        <a class="btn btn-secondary" href="https://zoo.industries">Zoo Industries</a>
+      </div>
+      <pre class="install"><span class="cmt"># install the cli</span>
+<span class="ok">$</span> npm i -g @zooai/bot
+<span class="cmt"># run the wizard</span>
+<span class="ok">$</span> zoo-bot onboard</pre>
+    </section>
+
+    <section class="feat" id="features">
+      <h2>What ships in the box</h2>
+      <div class="grid">
+        <div class="card"><h3>Runs locally</h3><p>macOS, Linux, Windows (WSL2). Bring your own keys. Anthropic, OpenAI, Google, or local models via Ollama.</p></div>
+        <div class="card"><h3>Any channel</h3><p>WhatsApp, Telegram, Slack, Discord, Signal, iMessage, IRC, Matrix, Teams. DM and group chats. One agent, every surface.</p></div>
+        <div class="card"><h3>Persistent memory</h3><p>Becomes uniquely yours over time. Vector + relational memory, on-device by default, never sent off-machine without consent.</p></div>
+        <div class="card"><h3>Tools that act</h3><p>Files, shell, browser, Git, code-exec, MCP. Sandboxed by default; full-system mode when you ask for it.</p></div>
+        <div class="card"><h3>Decentralised intelligence</h3><p>zLLM experience-based learning over a frozen base. Training-free adaptation, governed by the Zoo DAO via ZIPs.</p></div>
+        <div class="card"><h3>Open source</h3><p>MIT-licensed. Issue tracker, changelog, and audits public. Foundation-stewarded — Zoo Labs Foundation 501(c)(3).</p></div>
+      </div>
+    </section>
+
+    <section class="feat" id="stack">
+      <h2>Built on the open stack</h2>
+      <div class="stack">
+        <span><b>Lux</b> · post-quantum L0</span>
+        <span><b>Hanzo</b> · L1 AI compute, $AI mining</span>
+        <span><b>Zoo</b> · application + governance, $ZOO</span>
+        <span><b>Zen LM</b> · co-developed frontier models</span>
+        <span><b>Bootnode</b> · validator + RPC orchestration</span>
+        <span><b>MCP</b> · model context protocol everywhere</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container row">
+      <div>© Zoo Labs Foundation, 501(c)(3) — open AI research network.</div>
+      <div>
+        <a href="https://github.com/zooai">github.com/zooai</a> ·
+        <a href="https://zips.zoo.ngo">zips</a> ·
+        <a href="https://zoo.network">zoo.network</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
