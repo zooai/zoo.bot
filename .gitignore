@@ -3,7 +3,6 @@
 *.swo
 node_modules/
 .claude/
-CLAUDE.md
 AGENTS.md
 QWEN.md
 GEMINI.md
