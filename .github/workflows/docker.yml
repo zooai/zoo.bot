@@ -10,8 +10,8 @@ jobs:
     uses: zooai/.github/.github/workflows/docker-build.yml@main
     with:
       image: ghcr.io/zooai/zoo-bot
-      runner-amd64: evo
+      runner-amd64: linux-amd64
       runner-arm64: linux-amd64
-      runner-deploy: evo
+      runner-deploy: linux-amd64
       platforms: "linux/amd64"
     secrets: inherit
