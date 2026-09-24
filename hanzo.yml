@@ -1,0 +1,9 @@
+# Hanzo CI/CD for zooai/zoo.bot: .github/workflows/cicd.yml imports hanzoai/ci,
+# which reads this file. The build door builds each image, one BuildKit Job
+# per platform.
+images:
+  - name: zoo-bot
+    context: .
+    dockerfile: Dockerfile
+    repo: ghcr.io/zooai/zoo-bot
+    platforms: [linux/amd64]
